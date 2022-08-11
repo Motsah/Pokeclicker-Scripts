@@ -31,7 +31,8 @@ function initAutoHatch() {
     </button>`
 
     // TFA: not enough, we need a new line
-    var buttons = breedingModal.querySelector('.modal-header').querySelectorAll('button')
+    const header = breedingModal.querySelector('.modal-header')
+    const buttons = header.querySelectorAll('button')
     var div_orig = document.createElement('div')
     div_orig.className = 'orig-buttons'
     for (let button of buttons) {
@@ -60,6 +61,7 @@ function initAutoHatch() {
     PKRS Strict [${pkrsStrict ? 'ON' : 'OFF'}]
     </button>
     `)
+    div_orig.parentNode.insertBefore(header, div)
 
     document.getElementById('auto-hatch-start').addEventListener('click', event => { toggleAutoHatch(event); });
     document.getElementById('sort-sync').addEventListener('click', event => { changesortsync(event); });
