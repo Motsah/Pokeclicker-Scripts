@@ -31,7 +31,7 @@ function initAutoHatch() {
     </button>`
 
     // TFA: not enough, we need a new line
-    const buttons = breedingModal.querySelector('.modal-header').querySelectorAll('button')
+    var buttons = breedingModal.querySelector('.modal-header').querySelectorAll('button')
     var div_orig = document.createElement('div')
     div_orig.className = 'orig-buttons'
     for (let button of buttons) {
