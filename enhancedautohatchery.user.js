@@ -31,7 +31,11 @@ function initAutoHatch() {
     </button>`
 
     // TFA: not enough, we need a new line
-    breedingModal.querySelector('.modal-header').querySelectorAll('button')[2].outerHTML += `<button id="sort-sync" class="btn btn-${hatcherySortSync ? 'success' : 'danger'}" style="margin-left:20px;">
+    const header = breedingModal.querySelector('.modal-header')
+    header.querySelectorAll('h5')[0].outerHTML += `<div class="orig-buttons">`
+    header.querySelectorAll('button')[2].outerHTML +=`</div>
+    <div class="scripts-buttons">
+    <button id="sort-sync" class="btn btn-${hatcherySortSync ? 'success' : 'danger'}" style="margin-left:20px;">
     Pokemon List Sync [${hatcherySortSync ? 'ON' : 'OFF'}]
     </button>
     <button id="auto-egg" class="btn btn-${eggState ? 'success' : 'danger'}" style="margin-left:20px;">
@@ -48,7 +52,8 @@ function initAutoHatch() {
     </button>
     <button id="pkrs-strict" class="btn btn-${pkrsStrict ? 'success' : 'danger'}" style="margin-left:20px;">
     PKRS Strict [${pkrsStrict ? 'ON' : 'OFF'}]
-    </button>`
+    </button>
+    </div>`
 
     document.getElementById('auto-hatch-start').addEventListener('click', event => { toggleAutoHatch(event); });
     document.getElementById('sort-sync').addEventListener('click', event => { changesortsync(event); });
