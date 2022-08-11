@@ -34,7 +34,9 @@ function initAutoHatch() {
     const buttons = breedingModal.querySelector('.modal-header').querySelectorAll('button')
     var div_orig = document.createElement('div')
     div_orig.className = 'orig-buttons'
-    buttons.parentNode.insertBefore(div_orig, buttons)
+    for (let button of buttons) {
+        button.parentNode.insertBefore(div_orig, button)
+    }
     div_orig.appendChild(buttons)
     var div = document.createElement('div')
     div.className = 'scripts-buttons'
