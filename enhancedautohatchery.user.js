@@ -36,8 +36,8 @@ function initAutoHatch() {
     div_orig.className = 'orig-buttons'
     for (let button of buttons) {
         button.parentNode.insertBefore(div_orig, button)
+        div_orig.appendChild(button)
     }
-    div_orig.appendChild(buttons)
     var div = document.createElement('div')
     div.className = 'scripts-buttons'
     div.append(`
