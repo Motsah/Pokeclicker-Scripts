@@ -39,8 +39,8 @@ function initAutoHatch() {
         button.parentNode.insertBefore(div_orig, button)
         div_orig.appendChild(button)
     }
-    // var div = document.createElement('div')
-    // div.className = 'scripts-buttons'
+    var div = document.createElement('div')
+    div.className = 'scripts-buttons'
     div_orig.outerHTML +=`
     <button id="sort-sync" class="btn btn-${hatcherySortSync ? 'success' : 'danger'}" style="margin-left:20px;">
     Pokemon List Sync [${hatcherySortSync ? 'ON' : 'OFF'}]
@@ -61,16 +61,7 @@ function initAutoHatch() {
     PKRS Strict [${pkrsStrict ? 'ON' : 'OFF'}]
     </button>
     `
-    // div_orig.parentNode.insertBefore(header, div)
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
+    div_orig.parentNode.insertBefore(div, div_orig.nextSibling)
 
     document.getElementById('auto-hatch-start').addEventListener('click', event => { toggleAutoHatch(event); });
     document.getElementById('sort-sync').addEventListener('click', event => { changesortsync(event); });
