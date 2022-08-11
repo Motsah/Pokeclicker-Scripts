@@ -3,7 +3,7 @@
 // @namespace    Pokeclicker Scripts
 // @match        https://www.pokeclicker.com/
 // @grant        none
-// @version      2.2
+// @version      2.3
 // @author       Ephenia (Original/Credit: Drak + Ivan Lay)
 // @description  Automatically hatches eggs at 100% completion. Adds an On/Off button for auto hatching as well as an option for automatically hatching store bought eggs and dug up fossils.
 // @updateURL   https://raw.githubusercontent.com/Ephenia/Pokeclicker-Scripts/master/enhancedautohatchery.user.js
@@ -30,7 +30,17 @@ function initAutoHatch() {
     Auto Hatch [${hatchState ? 'ON' : 'OFF'}]
     </button>`
 
-    breedingModal.querySelector('.modal-header').querySelectorAll('button')[1].outerHTML += `<button id="sort-sync" class="btn btn-${hatcherySortSync ? 'success' : 'danger'}" style="margin-left:20px;">
+    const header = breedingModal.querySelector('.modal-header')
+    const div_orig = document.createElement('div')
+    div_orig.className = 'orig-buttons'
+    for (let button of header.querySelectorAll('button')) {
+        button.parentNode.insertBefore(div_orig, button)
+        div_orig.appendChild(button)
+    }
+    const div = document.createElement('div')
+    div.className = 'scripts-buttons'
+    div.innerHTML += `
+    <button id="sort-sync" class="btn btn-${hatcherySortSync ? 'success' : 'danger'}" style="margin-left:20px;">
     Pokemon List Sync [${hatcherySortSync ? 'ON' : 'OFF'}]
     </button>
     <button id="auto-egg" class="btn btn-${eggState ? 'success' : 'danger'}" style="margin-left:20px;">
@@ -47,7 +57,9 @@ function initAutoHatch() {
     </button>
     <button id="pkrs-strict" class="btn btn-${pkrsStrict ? 'success' : 'danger'}" style="margin-left:20px;">
     PKRS Strict [${pkrsStrict ? 'ON' : 'OFF'}]
-    </button>`
+    </button>
+    `
+    header.insertBefore(div, div_orig.nextSibling)
 
     document.getElementById('auto-hatch-start').addEventListener('click', event => { toggleAutoHatch(event); });
     document.getElementById('sort-sync').addEventListener('click', event => { changesortsync(event); });
