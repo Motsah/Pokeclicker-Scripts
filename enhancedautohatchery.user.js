@@ -61,7 +61,7 @@ function initAutoHatch() {
     PKRS Strict [${pkrsStrict ? 'ON' : 'OFF'}]
     </button>
     `
-    div_orig.parentNode.insertBefore(div, div_orig.nextSibling)
+    header.insertBefore(div, div_orig.nextSibling)
 
     document.getElementById('auto-hatch-start').addEventListener('click', event => { toggleAutoHatch(event); });
     document.getElementById('sort-sync').addEventListener('click', event => { changesortsync(event); });
