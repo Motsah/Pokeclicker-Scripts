@@ -30,7 +30,8 @@ function initAutoHatch() {
     Auto Hatch [${hatchState ? 'ON' : 'OFF'}]
     </button>`
 
-    breedingModal.querySelector('.modal-header').querySelectorAll('button')[1].outerHTML += `<button id="sort-sync" class="btn btn-${hatcherySortSync ? 'success' : 'danger'}" style="margin-left:20px;">
+    // TFA: not enough, we need a new line
+    breedingModal.querySelector('.modal-header').querySelectorAll('button')[2].outerHTML += `<button id="sort-sync" class="btn btn-${hatcherySortSync ? 'success' : 'danger'}" style="margin-left:20px;">
     Pokemon List Sync [${hatcherySortSync ? 'ON' : 'OFF'}]
     </button>
     <button id="auto-egg" class="btn btn-${eggState ? 'success' : 'danger'}" style="margin-left:20px;">
