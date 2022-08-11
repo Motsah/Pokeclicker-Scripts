@@ -41,7 +41,7 @@ function initAutoHatch() {
     }
     var div = document.createElement('div')
     div.className = 'scripts-buttons'
-    div_orig.outerHTML +=`
+    div.innerHTML += `
     <button id="sort-sync" class="btn btn-${hatcherySortSync ? 'success' : 'danger'}" style="margin-left:20px;">
     Pokemon List Sync [${hatcherySortSync ? 'ON' : 'OFF'}]
     </button>
