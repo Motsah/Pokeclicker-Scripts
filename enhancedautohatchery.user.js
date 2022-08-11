@@ -62,6 +62,15 @@ function initAutoHatch() {
     </button>
     `
     // div_orig.parentNode.insertBefore(header, div)
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
 
     document.getElementById('auto-hatch-start').addEventListener('click', event => { toggleAutoHatch(event); });
     document.getElementById('sort-sync').addEventListener('click', event => { changesortsync(event); });
