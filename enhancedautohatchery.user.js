@@ -3,7 +3,7 @@
 // @namespace    Pokeclicker Scripts
 // @match        https://www.pokeclicker.com/
 // @grant        none
-// @version      2.0
+// @version      2.1
 // @author       Ephenia (Original/Credit: Drak + Ivan Lay)
 // @description  Automatically hatches eggs at 100% completion. Adds an On/Off button for auto hatching as well as an option for automatically hatching store bought eggs and dug up fossils.
 // @updateURL   https://raw.githubusercontent.com/Ephenia/Pokeclicker-Scripts/master/enhancedautohatchery.user.js
@@ -155,7 +155,7 @@ function autoHatcher() {
 
         // Now add eggs to empty slots if we can
         while (
-            App.game.breeding.canAccess() == true && // Can access the Hatchery
+            App.game.breeding.canAccess() && // Can access the Hatchery
             App.game.party.hasMaxLevelPokemon() && // Don't run if you don't have any level 100 Pokemon
             App.game.breeding.hasFreeEggSlot() // Has an open egg slot
         ) {
@@ -217,17 +217,17 @@ function autoHatcher() {
                     const isEggFossil = (Math.floor(Math.random() * 2) + 1)
                     if (isEggFossil == 1) {
                         ItemList[storedEggName[randEggIndex]].use()
-                        return true;
+                        continue;
                     } else {
                         Underground.sellMineItem(storedFossilID[randFossilIndex])
-                        return true;
+                        continue;
                     }
                 } else if (hasEgg == true) {
                     ItemList[storedEggName[randEggIndex]].use()
-                    return true;
+                    continue;
                 } else if (hasFossil == true) {
                     Underground.sellMineItem(+storedFossilID[randFossilIndex])
-                    return true;
+                    continue;
                 }
             }
 
@@ -297,35 +297,39 @@ function autoHatcher() {
             if (pkrsState && hasPKRS && virusReady.length != 0) {
                 if (starterPKMN._level() == 100 && !starterPKMN.breeding) {
                     App.game.breeding.addPokemonToHatchery(starterPKMN);
-                    return true;
+                    continue;
                 } else if (starterPKMN._level() == 100 && starterPKMN.breeding) {
                     App.game.breeding.addPokemonToHatchery(virusReady[0]);
-                    return true;
+                    continue;
                 }
                 if (pkrsStrict) {
-                    return true;
-                } else {
-                    basicHatchery();
+                    break;
                 }
-            } else {
-                basicHatchery();
+            }
+
+            if (basicHatchery()) {
+                continue;
             }
 
             function basicHatchery() {
                 try {
                     App.game.breeding.addPokemonToHatchery(filteredEggList[0]);
+                    return true;
                 } catch (err) {
                     const isFavorite = BreedingFilters.category.value();
                     if (isFavorite != 1) {
                         const canBreed = PartyController.getSortedList().filter(e => e._level() == 100 && e.breeding == false);
                         const randBreed = getRandomInt(canBreed.length);
                         App.game.breeding.addPokemonToHatchery(canBreed[randBreed]);
-                    } else {
                         return true;
+                    } else {
+                        return false;
                     }
                 }
             }
 
+            // Nothing done, exit loop.
+            break;
         }
     }, 50); // Runs every game tick
 }
